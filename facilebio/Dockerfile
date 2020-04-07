@@ -5,6 +5,7 @@ LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 # every now and again without reinstalling all of them again, so we can
 # do that here. Run a no-op command to flip this on/of/rerun
 # RUN pwd
+# RUN dat
 
 RUN Rscript -e "library(BiocManager); install(c(\
     'facilebio/FacileData', \

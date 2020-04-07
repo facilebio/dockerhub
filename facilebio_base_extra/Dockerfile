@@ -16,7 +16,6 @@ RUN Rscript -e "library(BiocManager); install(c(\
   ))" \
   && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
-# RUN pwd
 # RUN Rscript -e "library(BiocManager); install(update = TRUE, ask = FALSE)" \
 #    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
