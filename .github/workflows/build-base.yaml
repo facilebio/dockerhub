@@ -3,9 +3,11 @@ on:
     branches:
       - master
       - devel
+    paths:
+      - 'facilebio_base/**'
   schedule:
-    # run every day at 9PM
-    - cron: '0 21 * * *'
+    # run every day at 1:00 AM
+    - cron: '0 1 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest

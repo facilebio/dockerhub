@@ -1,0 +1,23 @@
+on:
+    push:
+      branches:
+        - master
+        - devel
+      paths:
+        - 'facilebio/**'
+    schedule:
+      # run every day at 4:00 AM
+      - cron: '0 5 * * *'
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@master
+        - name: Publish facilebio to Docker Hub
+          uses: elgohr/Publish-Docker-Github-Action@master
+          with:
+            name: facilebio/facilebio
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
+            workdir: facilebio
+  
