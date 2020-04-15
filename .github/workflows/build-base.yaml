@@ -1,11 +1,11 @@
 on:
+  push:
+    branches:
+      - master
+      - devel
   schedule:
     # run every day at 9PM
     - cron: '0 21 * * *'
-  push:
-    - branches:
-      - master
-      - devel
 jobs:
   build:
     runs-on: ubuntu-latest
