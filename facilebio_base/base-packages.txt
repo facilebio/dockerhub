@@ -122,9 +122,13 @@ memoise
 mime
 miniUI
 munsell
+msigdbr
 MultiAssayExperiment
 openssl
+org.Hs.eg.db
+org.Mm.eg.db
 OrganismDbi
+PANTHER.db
 parathyroidSE
 pillar
 pkgbuild
@@ -148,6 +152,7 @@ RBGL
 RColorBrewer
 Rcpp
 RCurl
+reactome.db
 readr
 readxl
 rematch
@@ -178,6 +183,7 @@ shinyWidgets
 ShortRead
 snow
 sourcetools
+statmod
 stringi
 stringr
 SingleCellExperiment
@@ -194,6 +200,7 @@ VariantAnnotation
 vctrs
 viridis
 viridisLite
+webshot
 withr
 xfun
 XML

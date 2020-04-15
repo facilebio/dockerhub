@@ -5,7 +5,7 @@ build:
 	docker build -t $(TAG):$(VERSION) .
 
 inspect:
-	docker run --rm -it $(TAG):$(VERSION)
+	docker run --rm -it -e PASSWORD=bioc -p 8787:8787 --entrypoint "/bin/bash" $(TAG):$(VERSION)
 
 run:
 	docker run \
