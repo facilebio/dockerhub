@@ -28,6 +28,7 @@ bookdown
 broom
 BSgenome
 callr
+caTools
 cellranger
 checkmate
 circlize
@@ -76,16 +77,19 @@ GenomicAlignments
 GenomicFeatures
 GenomicRanges
 GetoptLong
+gdata
 ggplot2
 GlobalOptions
 glue
 GO.db
 goseq
+gplots
 graph
 gridExtra
 GSEABase
 GSVA
 gtable
+gtools
 Gviz
 HDF5Array
 hexbin
@@ -189,6 +193,7 @@ stringi
 stringr
 SingleCellExperiment
 SummarizedExperiment
+sva
 sys
 testthat
 tibble
