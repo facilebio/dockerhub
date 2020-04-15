@@ -8,7 +8,7 @@ on:
   schedule:
     # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule
     # https://crontab.guru/ to debug cron syntax
-    # run every day at 4:00 AM
+    # run every day at 4:00 AM (takes ~ 5 mins)
     - cron: '0 4 * * *'
 jobs:
   build:
