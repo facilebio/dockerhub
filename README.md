@@ -1,3 +1,5 @@
+![.github/workflows/build-base.yaml](https://github.com/facilebio/dockerhub/workflows/.github/workflows/build-base.yaml/badge.svg)
+
 # Overview
 
 We provide several docker images that make it easier to use and develop
