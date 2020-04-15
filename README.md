@@ -1,4 +1,6 @@
 ![.github/workflows/build-base.yaml](https://github.com/facilebio/dockerhub/workflows/.github/workflows/build-base.yaml/badge.svg)
+![.github/workflows/build-base-extra.yaml](https://github.com/facilebio/dockerhub/workflows/.github/workflows/build-base-extra.yaml/badge.svg)
+![.github/workflows/build-facilebio.yaml](https://github.com/facilebio/dockerhub/workflows/.github/workflows/build-facilebio.yaml/badge.svg)
 
 # Overview
 
