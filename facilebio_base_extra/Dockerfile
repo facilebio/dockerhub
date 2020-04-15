@@ -4,10 +4,6 @@ LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 # Installs R packages not available/released on the standard channels
 # (bioconductor / CRAN)
 
-# RUN pwd
-# RUN Rscript -e "library(BiocManager); install(update = TRUE, ask = FALSE)" \
-#    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
-
 # multiGSEA not in bioconductor yet
 RUN Rscript -e "library(BiocManager); install(c(\
     'lianos/msigdb.data', \
