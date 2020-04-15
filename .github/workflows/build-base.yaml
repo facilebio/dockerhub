@@ -11,7 +11,7 @@ on:
     # run every Monday and Thursday at 1:00 AM (takes about an hour)
     - cron: '0 1 * * 1,4'
 jobs:
-  build:
+  build-base:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master

@@ -11,7 +11,7 @@ on:
     # run every day at 5:00 AM
     - cron: '0 5 * * *'
 jobs:
-  build:
+  build-facilebio:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
