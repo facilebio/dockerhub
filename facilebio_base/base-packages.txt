@@ -158,6 +158,7 @@ readxl
 rematch
 remotes
 reshape2
+R.utils
 Rgraphviz
 rhdf5
 Rhdf5lib
