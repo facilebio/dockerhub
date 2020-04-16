@@ -102,6 +102,7 @@ htmlwidgets
 httpuv
 httr
 hwriter
+impute
 interactiveDisplayBase
 IRanges
 irlba
@@ -186,6 +187,7 @@ shinyjs
 shinythemes
 shinyWidgets
 ShortRead
+snakecase
 snow
 sourcetools
 statmod
@@ -208,6 +210,7 @@ viridis
 viridisLite
 webshot
 withr
+writexl
 xfun
 XML
 xml2
