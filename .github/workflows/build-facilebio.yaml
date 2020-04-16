@@ -8,8 +8,8 @@ on:
   schedule:
     # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule
     # https://crontab.guru/ to debug cron syntax
-    # run every day at 5:00 AM
-    - cron: '0 5 * * *'
+    # run every day at 4:00 AM Pacific Time (which is 11 AM UTC)
+    - cron: '0 16,12 * * *'
 jobs:
   build-facilebio:
     runs-on: ubuntu-latest

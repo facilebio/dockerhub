@@ -8,8 +8,9 @@ on:
   schedule:
     # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule
     # https://crontab.guru/ to debug cron syntax
-    # run every Monday and Thursday at 1:00 AM (takes about an hour)
-    - cron: '0 1 * * 1,4'
+    # run every Monday and Thursday at 1:00 AM Pacific (8 AM UTC)
+    # (takes about an hour)
+    - cron: '0 8 * * 1,4'
 jobs:
   build-base:
     runs-on: ubuntu-latest
