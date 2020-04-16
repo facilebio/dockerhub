@@ -79,6 +79,7 @@ GenomicRanges
 GetoptLong
 gdata
 ggplot2
+glmnet
 GlobalOptions
 glue
 GO.db
@@ -93,6 +94,7 @@ gtools
 Gviz
 HDF5Array
 hexbin
+highlight
 highr
 Hmisc
 hms
@@ -107,6 +109,7 @@ interactiveDisplayBase
 IRanges
 irlba
 isoband
+iterators
 jpeg
 jsonlite
 openxlsx
@@ -135,9 +138,11 @@ org.Mm.eg.db
 OrganismDbi
 PANTHER.db
 parathyroidSE
+paws
 pillar
 pkgbuild
 pkgconfig
+pkgdown
 pkgload
 plogr
 plotly
@@ -202,6 +207,8 @@ tibble
 tidyr
 tidyselect
 tinytex
+triebeard
+urltools
 utf8
 V8
 VariantAnnotation
