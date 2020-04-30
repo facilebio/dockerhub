@@ -6,6 +6,7 @@ AnnotationFilter
 AnnotationHub
 askpass
 assertthat
+aws.s3
 backports
 base64enc
 BH
@@ -138,7 +139,6 @@ org.Mm.eg.db
 OrganismDbi
 PANTHER.db
 parathyroidSE
-paws
 pillar
 pkgbuild
 pkgconfig
