@@ -1,4 +1,4 @@
-FROM bioconductor/bioconductor_docker:RELEASE_3_10
+FROM bioconductor/bioconductor_docker:RELEASE_3_11
 LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 
 ADD base-packages-install.R /tmp/
