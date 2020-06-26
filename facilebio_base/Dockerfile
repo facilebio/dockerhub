@@ -1,32 +1,23 @@
-FROM bioconductor/bioconductor_docker:RELEASE_3_10
+FROM bioconductor/bioconductor_docker:RELEASE_3_11
 LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 
 # Start: Install newer git version ---------------------------------------------
 # Default git version in RELEASE_3_11 is 2.17.1, but GitHub's
 # actions/checkout@v2 action requires a new one.
 #
-# Thanks to @fellgernon for the tip in the bioconductor #containers slack
-# channel.
+# Thanks to @fellgernon for pointing out that an older git version could be
+# a problem, and further for pointing out that using ppa would be a better way
+# to install it than compiling it from source.
 RUN sudo apt-get update -y
-RUN sudo apt-get install --no-install-recommends -y \
-   make \
-   libssl-dev \
-   libghc-zlib-dev \
-   libcurl4-gnutls-dev \
-   libexpat1-dev \
-   gettext \
-   unzip \
-  && apt-get clean
-RUN wget -q https://github.com/git/git/archive/v2.26.2.zip -O git.zip \
-   && unzip -qq git.zip
-WORKDIR /git-2.26.2
-RUN make prefix=/usr all \
-  && sudo make prefix=/usr install
-WORKDIR /
-RUN sudo rm -rf /git* \
-   /var/lib/apt/lists/ \
-   /tmp/downloaded_packages/ \
-   /tmp/*.rds
+RUN sudo apt-get install -y software-properties-common
+RUN sudo add-apt-repository -y ppa:git-core/candidate
+RUN sudo apt-get -y update
+RUN sudo apt-get install --only-upgrade -y git
+RUN sudo apt-get clean \
+  && sudo rm -rf \
+    /var/lib/apt/lists/ \
+    /tmp/downloaded_packages/ \
+    /tmp/*.rds
 # End: install newer get versio ------------------------------------------------
 
 ADD base-packages-install.R /tmp/
