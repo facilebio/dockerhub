@@ -1,6 +1,34 @@
 FROM bioconductor/bioconductor_docker:RELEASE_3_10
 LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 
+# Start: Install newer git version ---------------------------------------------
+# Default git version in RELEASE_3_11 is 2.17.1, but GitHub's
+# actions/checkout@v2 action requires a new one.
+#
+# Thanks to @fellgernon for the tip in the bioconductor #containers slack
+# channel.
+RUN sudo apt-get update -y
+RUN sudo apt-get install --no-install-recommends -y \
+   make \
+   libssl-dev \
+   libghc-zlib-dev \
+   libcurl4-gnutls-dev \
+   libexpat1-dev \
+   gettext \
+   unzip \
+  && apt-get clean
+RUN wget -q https://github.com/git/git/archive/v2.26.2.zip -O git.zip \
+   && unzip -qq git.zip
+WORKDIR /git-2.26.2
+RUN make prefix=/usr all \
+  && sudo make prefix=/usr install
+WORKDIR /
+RUN sudo rm -rf /git* \
+   /var/lib/apt/lists/ \
+   /tmp/downloaded_packages/ \
+   /tmp/*.rds
+# End: install newer get versio ------------------------------------------------
+
 ADD base-packages-install.R /tmp/
 ADD base-packages.txt /tmp/
 
