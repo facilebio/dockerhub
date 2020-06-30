@@ -18,7 +18,7 @@ RUN sudo apt-get clean \
     /var/lib/apt/lists/ \
     /tmp/downloaded_packages/ \
     /tmp/*.rds
-# End: install newer get versio ------------------------------------------------
+# End: install newer git version -----------------------------------------------
 
 ADD base-packages-install.R /tmp/
 ADD base-packages.txt /tmp/
