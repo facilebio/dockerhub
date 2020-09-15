@@ -47,7 +47,6 @@ DESeq2
 dbplyr
 DelayedArray
 DelayedMatrixStats
-DenaliEyrie
 desc
 dichromat
 digest
