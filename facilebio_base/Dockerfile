@@ -4,7 +4,7 @@ LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 # Newer versions of bioconductor_docker image freezes the CRAN repos to:
 # https://packagemanager.rstudio.com/all/__linux__/bionic/291
 # but we want /latest
-RUN sudo echo "options(repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/bionic/latest'))" >> /usr/lo
+RUN sudo echo $'options(repos = c(CRAN = "https://packagemanager.rstudio.com/all/__linux__/bionic/latest"))' >> /usr/lo
 cal/lib/R/etc/Rprofile.site
 
 # Start: Install newer git version ---------------------------------------------
