@@ -9,6 +9,9 @@
 We provide several docker images in order to make the development and deployment
 of facile.bio based workflows easier.
 
+All of this images are built from the
+[bioconductor/bioconductor_docker:RELEASE_3_11](https://hub.docker.com/r/bioconductor/bioconductor_docker).
+
 These images are built nightly and pushed to
 [dockerhub/facilebio](https://hub.docker.com/u/facilebio) using GitHub Actions.
 
