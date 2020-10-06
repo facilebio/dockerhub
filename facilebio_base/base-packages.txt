@@ -156,6 +156,7 @@ ProtGenerics
 ps
 purrr
 R6
+ragg
 rappdirs
 RBGL
 RColorBrewer
