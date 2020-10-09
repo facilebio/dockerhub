@@ -160,7 +160,6 @@ ragg
 rappdirs
 RBGL
 RColorBrewer
-Rcpp
 RCurl
 reactome.db
 readr

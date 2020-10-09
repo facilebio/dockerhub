@@ -28,12 +28,14 @@ RUN sudo apt-get clean \
 ADD base-packages-install.R /tmp/
 ADD base-packages.txt /tmp/
 
-RUN R -f /tmp/base-packages-install.R
-
-# Installing a compiled Rcpp binary from the public RSPM can get wonky still
-# as of 2020-09-15:
+# As of 2020-09-15, installing a compiled Rcpp binary from the public RSPM can
+# get wonky still, so we will install that first from source, then use RSPM
+# binaries for the rest.
 # https://community.rstudio.com/t/package-manager-and-travis/73816
 RUN Rscript -e "options(repos = 'https://cran.rstudio.com/'); install.packages('Rcpp', type = 'source')"
+
+# Use the default RSPM mojo to install the rest of the packages
+RUN R -f /tmp/base-packages-install.R
 
 # Now that we've got the base packages here, we will want to update them
 # every now and again without reinstalling all of them again, so we can
@@ -41,10 +43,6 @@ RUN Rscript -e "options(repos = 'https://cran.rstudio.com/'); install.packages('
 # RUN pwd
 RUN Rscript -e "options(repos = 'https://cran.rstudio.com/'); BiocManager::install(update = TRUE, ask = FALSE)" \
    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
-
-# RUN pwd
-# RUN Rscript -e "library(BiocManager); install(update = TRUE, ask = FALSE)" \
-#    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 # Init command for s6-overlay
 CMD ["/init"]
