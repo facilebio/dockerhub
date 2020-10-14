@@ -25,6 +25,13 @@ RUN sudo apt-get clean \
     /tmp/*.rds
 # End: install newer git version -----------------------------------------------
 
+# Required for textshaping library
+RUN sudo apt-get install -y libfribidi-dev \
+  && sudo rm -rf \
+    /var/lib/apt/lists/ \
+    /tmp/downloaded_packages/ \
+    /tmp/*.rds
+
 ADD base-packages-install.R /tmp/
 ADD base-packages.txt /tmp/
 
