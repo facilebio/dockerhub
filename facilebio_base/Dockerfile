@@ -26,6 +26,7 @@ RUN sudo apt-get clean \
 # End: install newer git version -----------------------------------------------
 
 # Required for textshaping library
+RUN sudo apt-get update -y
 RUN sudo apt-get install -y libfribidi-dev \
   && sudo rm -rf \
     /var/lib/apt/lists/ \
