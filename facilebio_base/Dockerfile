@@ -6,25 +6,6 @@ LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 # but we want /latest
 RUN sudo echo 'options(repos = c(CRAN = "https://packagemanager.rstudio.com/all/__linux__/bionic/latest"))' >> /usr/local/lib/R/etc/Rprofile.site
 
-# Start: Install newer git version ---------------------------------------------
-# Default git version in RELEASE_3_11 is 2.17.1, but GitHub's
-# actions/checkout@v2 action requires a new one.
-#
-# Thanks to @fellgernon for pointing out that an older git version could be
-# a problem, and further for pointing out that using ppa would be a better way
-# to install it than compiling it from source.
-RUN sudo apt-get update -y
-RUN sudo apt-get install -y software-properties-common
-RUN sudo add-apt-repository -y ppa:git-core/candidate
-RUN sudo apt-get -y update
-RUN sudo apt-get install --only-upgrade -y git
-RUN sudo apt-get clean \
-  && sudo rm -rf \
-    /var/lib/apt/lists/ \
-    /tmp/downloaded_packages/ \
-    /tmp/*.rds
-# End: install newer git version -----------------------------------------------
-
 # Required for textshaping library
 RUN sudo apt-get update -y
 RUN sudo apt-get install -y libfribidi-dev \
