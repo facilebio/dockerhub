@@ -1,4 +1,4 @@
-FROM bioconductor/bioconductor_docker:RELEASE_3_11
+FROM bioconductor/bioconductor_docker:RELEASE_3_12
 LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 
 # Newer versions of bioconductor_docker image freezes the CRAN repos to:
