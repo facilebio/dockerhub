@@ -6,9 +6,10 @@ LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 
 # multiGSEA not in bioconductor yet
 RUN Rscript -e "library(BiocManager); install(c(\
-    'lianos/msigdb.data', \
-    'lianos/multiGSEA@develop', \
-    'lianos/multiGSEA.shiny@develop' \
+    'igordot/babelgene', \
+    'igordot/msigdbr', \
+    'lianos/sparrow', \
+    'lianos/sparrow.shiny' \
   ))" \
   && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
