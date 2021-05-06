@@ -4,10 +4,7 @@ LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 # Installs R packages not available/released on the standard channels
 # (bioconductor / CRAN)
 
-# multiGSEA not in bioconductor yet
 RUN Rscript -e "library(BiocManager); install(c(\
-    'igordot/babelgene', \
-    'igordot/msigdbr', \
     'lianos/sparrow', \
     'lianos/sparrow.shiny' \
   ))" \
