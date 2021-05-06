@@ -39,6 +39,7 @@ clipr
 clue
 colorspace
 ComplexHeatmap
+ComplexUpset
 crayon
 crosstalk
 curl
@@ -52,6 +53,7 @@ desc
 dichromat
 digest
 docopt
+doFuture
 dplyr
 DT
 dtplyr
@@ -69,6 +71,9 @@ formatR
 Formula
 futile.logger
 futile.options
+future
+future.apply
+furrr
 geneLenDataBase
 geneplotter
 generics
@@ -233,6 +238,7 @@ cluster
 codetools
 compiler
 datasets
+foreach
 foreign
 graphics
 grDevices
