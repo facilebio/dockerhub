@@ -12,7 +12,7 @@ RUN Rscript -e "library(BiocManager); install(c(\
     'facilebio/FacileBiocData', \
     'facilebio/FacileViz', \
     'facilebio/FacileShine', \
-    'facilebio/FacileAnalysis' \
+    'facilebio/FacileAnalysis', \
     'facilebio/FacileIncubator' \
   ))" \
   && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
