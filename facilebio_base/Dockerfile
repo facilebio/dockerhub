@@ -1,14 +1,16 @@
 FROM bioconductor/bioconductor_docker:RELEASE_3_12
 LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 
-# Newer versions of bioconductor_docker image freezes the CRAN repos to:
-# https://packagemanager.rstudio.com/all/__linux__/bionic/291
-# but we want /latest
+# Newer versions of bioconductor_docker image sets options::repos to a
+# frozen RSPM date. This is good for reproducibility at large, but I like
+# to live on the edge/latest.
 RUN sudo echo 'options(repos = c(CRAN = "https://packagemanager.rstudio.com/all/__linux__/bionic/latest"))' >> /usr/local/lib/R/etc/Rprofile.site
 
 # Required for textshaping library
 RUN sudo apt-get update -y
-RUN sudo apt-get install -y libfribidi-dev \
+RUN sudo apt-get install -y \
+  libfribidi-dev \
+  libmagick++-dev \
   && sudo rm -rf \
     /var/lib/apt/lists/ \
     /tmp/downloaded_packages/ \
@@ -17,11 +19,27 @@ RUN sudo apt-get install -y libfribidi-dev \
 ADD base-packages-install.R /tmp/
 ADD base-packages.txt /tmp/
 
-# As of 2020-09-15, installing a compiled Rcpp binary from the public RSPM can
-# get wonky still, so we will install that first from source, then use RSPM
-# binaries for the rest.
-# https://community.rstudio.com/t/package-manager-and-travis/73816
-RUN Rscript -e "options(repos = 'https://cran.rstudio.com/'); install.packages('Rcpp', type = 'source')"
+# Installation of 'foundational' compiled packages / language bridged packages
+# can be wonky if we install the prepackaged stuff, so we (re)compile this
+# by source as many of the downstream packages we end up relying on uses
+# header libraries from here. So also this related note about pre-built packages
+# and RSPM.
+#   https://community.rstudio.com/t/package-manager-and-travis/73816
+RUN Rscript -e "\
+  install.packages(c(\
+      'Rcpp', \
+      'cpp11', \
+      'RcppEigen', \
+      'RcppAnnoy', \
+      'RcppArmadillo', \
+      'RcppHNSW', \
+      'igraph', \
+      'magick', \
+      'mclust', \
+      'RANN', \
+      'V8'), \
+    repos = 'https://cran.rstudio.com', \
+    type = 'source')"
 
 # Use the default RSPM mojo to install the rest of the packages
 RUN R -f /tmp/base-packages-install.R
