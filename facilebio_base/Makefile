@@ -9,9 +9,15 @@ inspect:
 
 run:
 	docker run \
-	  -e PASSWORD=bioc \
+	  -e DISABLE_AUTH=true \
 	  -p 8787:8787 \
 	  $(TAG):$(VERSION)
 
+inspect:
+	docker run --rm -it \
+	  -e DISABLE_AUTH=true \
+	  -p 8787:8787
+	  --entrypoint "/bin/bash" $(TAG):$(VERSION)
+
 push:
-	docker push $(TAG):$(VERSION) 
+	docker push $(TAG):$(VERSION)

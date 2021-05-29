@@ -6,14 +6,14 @@ build:
 
 inspect:
 	docker run --rm -it \
-	  -e PASSWORD=bioc \
+	  -e DISABLE_AUTH=true \
 	  -p 8787:8787 \
 	  -v /Users/lianoglou/workspace/facilebio/public/packages:/home/rstudio/facilebio \
 	  --entrypoint "/bin/bash" $(TAG):$(VERSION)
 
 run:
 	docker run \
-	  -e PASSWORD=bioc \
+	  -e DISABLE_AUTH=true \
 	  -p 8787:8787 \
 	  -v /Users/lianoglou/workspace/facilebio/public/packages:/home/rstudio/facilebio \
 	  $(TAG):$(VERSION)
