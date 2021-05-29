@@ -1,6 +1,13 @@
 FROM bioconductor/bioconductor_docker:RELEASE_3_13
 LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 
+# We need to install the preview version of RStudio because the "release"
+# version of RStudio that comes with the latest bioc images crashes when ggplot2
+# is used due to some change in the R graphics engine in R 4.1.9
+RUN wget -q "https://s3.amazonaws.com/rstudio-ide-build/server/bionic/amd64/rstudio-server-1.4.1717-amd64.deb" \
+  && dpkg -i rstudio-server-*-amd64.deb \
+  && rm rstudio-server-*-amd64.deb
+
 # Newer versions of bioconductor_docker image sets options::repos to a
 # frozen RSPM date. This is good for reproducibility at large, but I like
 # to live on the edge/latest.
