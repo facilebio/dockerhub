@@ -1,4 +1,4 @@
-FROM bioconductor/bioconductor_docker:RELEASE_3_13
+FROM bioconductor/bioconductor_docker:RELEASE_3_12
 LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 
 # We need to install the preview version of RStudio because the "release"
