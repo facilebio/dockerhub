@@ -162,6 +162,7 @@ promises
 ProtGenerics
 ps
 purrr
+qs
 R6
 ragg
 rappdirs

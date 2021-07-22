@@ -34,12 +34,14 @@ ADD base-packages.txt /tmp/
 #   https://community.rstudio.com/t/package-manager-and-travis/73816
 RUN Rscript -e "\
   install.packages(c(\
+      'RApiSerialize', \
       'Rcpp', \
       'cpp11', \
       'RcppEigen', \
       'RcppAnnoy', \
       'RcppArmadillo', \
       'RcppHNSW', \
+      'RcppParallel', \
       'igraph', \
       'magick', \
       'mclust', \
