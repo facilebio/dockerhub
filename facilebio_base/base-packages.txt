@@ -122,6 +122,7 @@ jsonlite
 openxlsx
 knitr
 labeling
+languageserver
 lambda.r
 later
 latticeExtra
