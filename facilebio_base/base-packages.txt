@@ -13,6 +13,7 @@ base64enc
 BH
 BiasedUrn
 Biobase
+BiocCheck
 BiocFileCache
 BiocGenerics
 BiocManager
