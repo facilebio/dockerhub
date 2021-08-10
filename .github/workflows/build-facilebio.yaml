@@ -8,13 +8,14 @@ on:
   schedule:
     # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule
     # https://crontab.guru/ to debug cron syntax
-    # run every day at 5:00 AM Pacific Time (which is noon UTC)
-    - cron: '0 12 * * *'
+    # run monday's and thursdays (1,4) at 5:00 AM Pacific Time (which is noon UTC)
+    - cron: '0 12 * * 1,4'
   workflow_dispatch:
     inputs:
-      description: 'A dummy variable to enable manual workflow execution'
-      required: false
-      default: 'gitty up'
+      dummy:
+        description: 'A dummy variable to enable manual workflow execution'
+        required: false
+        default: 'gitty up'
 name: build-facilebio
 jobs:
   build-facilebio:
