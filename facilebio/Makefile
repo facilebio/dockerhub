@@ -18,5 +18,17 @@ run:
 	  -v /Users/lianoglou/workspace/facilebio/public/packages:/home/rstudio/facilebio \
 	  $(TAG):$(VERSION)
 
+dev:
+	docker run --rm -it -d --name facilebio \
+	  -v /Users/lianoglou/workspace/facilebio/public/packages:/home/rstudio/facilebio \
+	  -v /Users/lianoglou/workspace/data/eyriedata:/datasets \
+	  -v /Users/lianoglou/.config/rstudio:/home/rstudio/.config/rstudio \
+	  -p 8080:8787 \
+	  --entrypoint /init \
+	  --env SHINYPROXY_USERNAME=$(USER) \
+	  -e DISABLE_AUTH=true \
+	  $(TAG):$(VERSION) && \
+	  sleep 5 && open http://localhost:8080
+
 push:
 	docker push $(TAG):$(VERSION)
