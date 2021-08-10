@@ -17,6 +17,7 @@ on:
       description: 'A dummy variable to enable manual workflow execution'
       required: false
       default: 'gitty up'
+name: build-base
 jobs:
   build-base:
     runs-on: ubuntu-latest

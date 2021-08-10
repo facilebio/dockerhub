@@ -15,6 +15,7 @@ on:
       description: 'A dummy variable to enable manual workflow execution'
       required: false
       default: 'gitty up'
+name: build-facilebio
 jobs:
   build-facilebio:
     runs-on: ubuntu-latest
