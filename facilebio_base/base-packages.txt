@@ -18,6 +18,7 @@ BiocFileCache
 BiocGenerics
 BiocManager
 BiocParallel
+BiocSet
 BiocStyle
 BiocVersion
 biomaRt
