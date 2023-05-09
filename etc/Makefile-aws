@@ -38,7 +38,7 @@
 #     https://github.com/fbreitwieser/pavian
 #     https://stackoverflow.com/a/2826178/83761 [to allow defined variables at the command line]
 
-version?=release# `devel` or `latest`
+version?=latest # `devel` or `latest`
 rport?=8080# rstudio port
 sport?=8888# shiny port
 imagename=collection/imagename# set this
@@ -88,16 +88,27 @@ progress?=auto
 
 
 # This requires a `make ecr-login` first because our dockerfile depends on an
-# image in the ecr registry
+# image in the ecr registry.
+#
+# Uses the secrets functionality in docker >-= 20.10 to pull the GITHUB_PAT from
+# the local environment and make it available as a secret to the Dockerfile.
+# The GITHUB_PAT can only be exposed "per layer" (ie. for just one RUN command
+# at a time). To create a GITHUB_PAT environment variable during the dobker builc
+# process, you will have to read the secrets file from /run/secrets and set it
+# to an environment varialbe, like so:
+#
+#     RUN --mount=type=secret,id=GITHUB_PAT \
+#         GITHUB_PAT="$(cat /run/secrets/GITHUB_PAT)" \
+#         Rscript -e "BiocManager::install('facilebio/FacileBiocData')
+#
+# For mor information: https://pythonspeed.com/articles/docker-build-secrets/
 build: ecr-login
-	echo "${GITHUB_TOKEN}" > ${ghsecretfile}
 	DOCKER_BUILDKIT=1 docker build \
 		--progress ${progress} \
 		${cache_directive} \
-	  --secret id=ghtoken,src=${ghsecretfile} \
-	  -f ${dockerfile} \
-	  -t ${tag} .
-	rm ${ghsecretfile}
+		--secret id=GITHUB_PAT \
+		-f ${dockerfile} \
+		-t ${tag} .
 
 # rstudio:
 # 	docker run --rm -it -d \
