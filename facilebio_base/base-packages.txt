@@ -47,6 +47,7 @@ crayon
 crosstalk
 curl
 data.table
+datamods
 DBI
 DESeq2
 dbplyr
@@ -169,6 +170,8 @@ qs
 R6
 ragg
 rappdirs
+reactable
+reactR
 RBGL
 RColorBrewer
 RCurl
@@ -195,6 +198,7 @@ S4Vectors
 scales
 shape
 shiny
+shinybusy
 shinycssloaders
 shinydashboard
 shinydashboardPlus
@@ -214,6 +218,7 @@ sva
 sys
 testthat
 tibble
+tictoc
 tidyr
 tidyselect
 tinytex
