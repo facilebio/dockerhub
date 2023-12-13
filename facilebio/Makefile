@@ -1,8 +1,29 @@
-TAG="facilebio/facilebio"
-VERSION="latest"
+imagename="facilebio/facilebio"
+version="latest"
+tag=${imagename}:${version}
+
+dockerdir=.
+secretfile=${dockerdir}/.env
+dockerfile=${dockerdir}/Dockerfile
+
+# docker build customizations -------------------------------------------------
+ifdef nocache
+cache_directive=--no-cache
+else
+cache_directive=
+endif
+
+progress?=plain
 
 build:
-	docker build --no-cache -t $(TAG):$(VERSION) .
+	DOCKER_BUILDKIT=1 docker build \
+		--progress ${progress} \
+		${cache_directive} \
+		--secret id=GITHUB_PAT \
+		-f ${dockerfile} \
+		-t ${tag} \
+		${dockerdir} \
+		--platform linux/amd64
 
 inspect:
 	docker run --rm -it \

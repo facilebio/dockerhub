@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 FROM facilebio/facilebio_base_extra:latest
 LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 
@@ -8,7 +9,7 @@ LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 # RUN dat
 
 RUN --mount=type=secret,id=GITHUB_PAT \
-    GITHUB_PAT="$(cat /run/secrets/GITHUB_PAT)" \
+    GITHUB_PAT=$(cat /run/secrets/GITHUB_PAT) \
     Rscript -e "library(BiocManager); install(c(\
         'facilebio/FacileData', \
         'facilebio/FacileBiocData', \
