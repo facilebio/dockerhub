@@ -17,6 +17,8 @@ on:
         required: false
         default: 'gitty up'
 name: build-facilebio
+env:
+  GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   build-facilebio:
     runs-on: ubuntu-latest
