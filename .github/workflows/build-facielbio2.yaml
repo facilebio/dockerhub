@@ -30,7 +30,7 @@ jobs:
 
             - name: Debug
               run: |
-                echo "GITHUB_TOKEN -> {{ secrets.GITHUB_TOKEN }}"
+                echo "GITHUB_TOKEN -> ${{ secrets.GITHUB_TOKEN }}"
 
             - name: Docker metadata
               id: metadata
@@ -52,4 +52,4 @@ jobs:
                 push: true
                 tags: ${{ env.IMG_NAME }}:latest
                 context: facilebio
-                secret-envs: GITHUB_PAT={{ secrets.GITHUB_TOKEN }}
+                secret-envs: GITHUB_PAT=${{ secrets.GITHUB_TOKEN }}
