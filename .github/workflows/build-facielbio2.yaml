@@ -24,6 +24,7 @@ jobs:
         runs-on: ubuntu-latest
         env:
             IMG_NAME: facilebio/facilebio
+            GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         steps:
             - name: Checkout
               uses: actions/checkout@v4
@@ -53,4 +54,4 @@ jobs:
                 tags: ${{ env.IMG_NAME }}:latest
                 context: facilebio
                 secrets: |
-                    GITHUB_PAT = ${{ secrets.GITHUB_TOKEN }}
+                    GITHUB_PAT = GITHUB_PAT
