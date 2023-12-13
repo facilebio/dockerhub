@@ -7,16 +7,18 @@ LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 # RUN pwd
 # RUN dat
 
-RUN Rscript -e "library(BiocManager); install(c(\
-    'facilebio/FacileData', \
-    'facilebio/FacileBiocData', \
-    'facilebio/FacileViz', \
-    'facilebio/FacileShine', \
-    'facilebio/FacileAnalysis', \
-    'facilebio/FacileAnalysisShine', \
-    'facilebio/FacileIncubator' \
-  ))" \
-  && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
+RUN --mount=type=secret,id=GITHUB_PAT \
+    GITHUB_PAT="$(cat /run/secrets/GITHUB_PAT)" \
+    Rscript -e "library(BiocManager); install(c(\
+        'facilebio/FacileData', \
+        'facilebio/FacileBiocData', \
+        'facilebio/FacileViz', \
+        'facilebio/FacileShine', \
+        'facilebio/FacileAnalysis', \
+        'facilebio/FacileAnalysisShine', \
+        'facilebio/FacileIncubator' \
+    ))" \
+    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 # RUN pwd
 # RUN Rscript -e "library(BiocManager); install(update = TRUE, ask = FALSE)" \

@@ -52,4 +52,5 @@ jobs:
                 push: true
                 tags: ${{ env.IMG_NAME }}:latest
                 context: facilebio
-                secret-envs: GITHUB_PAT=${{ secrets.GITHUB_TOKEN }}
+                secrets: |
+                    GITHUB_PAT = ${{ secrets.GITHUB_TOKEN }}
