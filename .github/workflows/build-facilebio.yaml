@@ -1,36 +1,57 @@
+# https://josephrodriguezg.medium.com/build-and-publish-docker-images-with-github-actions-78be3b3fbb9b
+# https://github.com/docker/build-push-action
+# Using secrets:
+# https://docs.docker.com/build/ci/github-actions/secrets/
+name: final-build
 on:
-  push:
-    branches:
-      - master
-      - devel
-    paths:
-      - 'facilebio/**'
-  schedule:
-    # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule
-    # https://crontab.guru/ to debug cron syntax
-    # run monday's and thursdays (1,4) at 5:00 AM Pacific Time (which is noon UTC)
-    - cron: '0 12 * * 1,4'
-  workflow_dispatch:
-    inputs:
-      dummy:
-        description: 'A dummy variable to enable manual workflow execution'
-        required: false
-        default: 'gitty up'
-name: build-facilebio
-env:
-  GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    push:
+      branches:
+        - '*'
+      paths:
+        - 'facilebio/**'
+    schedule:
+      # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule
+      # https://crontab.guru/ to debug cron syntax
+      # run monday's and thursdays (1,4) at 5:00 AM Pacific Time (which is noon UTC)
+      - cron: '0 12 * * 1,4'
+    workflow_dispatch:
+      inputs:
+        dummy:
+          description: 'A dummy variable to enable manual workflow execution'
+          required: false
+          default: 'gitty up'
 jobs:
-  build-facilebio:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Publish facilebio to Docker Hub
-        uses: elgohr/Publish-Docker-Github-Action@v5
+    docker:
+        name: Build & push docker image
+        runs-on: ubuntu-latest
         env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          name: facilebio/facilebio
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          workdir: facilebio
-          buildargs: GITHUB_PAT
+            IMG_NAME: facilebio/facilebio
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Docker metadata
+              id: metadata
+              uses: docker/metadata-action@v3
+              with:
+                images: ${{ env.IMG_NAME }}
+                tags: |
+                    type=ref,event=branch
+
+            - name: Log in to Docker Hub
+              uses: docker/login-action@v1
+              with:
+                username: ${{ secrets.DOCKER_USERNAME }}
+                password: ${{ secrets.DOCKER_PASSWORD }}
+
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v3
+
+            - name: Build and push docker image
+              uses: docker/build-push-action@v5
+              with:
+                push: true
+                tags: ${{ env.IMG_NAME }}:latest
+                context: facilebio
+                secrets: |
+                    "GITHUB_PAT=${{ secrets.GITHUB_TOKEN }}"

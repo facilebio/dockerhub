@@ -1,3 +1,4 @@
+name: base-build
 on:
   push:
     branches:
@@ -17,19 +18,37 @@ on:
         description: 'A dummy variable to enable manual workflow execution'
         required: false
         default: 'gitty up'
-name: build-base
 jobs:
-  build-base:
+  docker:
     runs-on: ubuntu-latest
+    env:
+      IMG_NAME: facilebio/facilebio_base
     steps:
-      - uses: actions/checkout@master
-      - name: Publish base to Docker Hub
-        uses: elgohr/Publish-Docker-Github-Action@master
-        env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Docker metadata
+        id: metadata
+        uses: docker/metadata-action@v3
         with:
-          name: facilebio/facilebio_base
+          images: ${{ env.IMG_NAME }}
+          tags: |
+              type=ref,event=branch
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          workdir: facilebio_base
-          buildargs: GITHUB_PAT
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push docker image
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: ${{ env.IMG_NAME }}:latest
+          context: facilebio_base
+          secrets: |
+              "GITHUB_PAT=${{ secrets.GITHUB_TOKEN }}"

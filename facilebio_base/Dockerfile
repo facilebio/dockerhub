@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 FROM bioconductor/bioconductor_docker:RELEASE_3_16
 LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 
