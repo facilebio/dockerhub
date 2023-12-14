@@ -58,4 +58,4 @@ dev:
 	  sleep 5 && open http://localhost:8080
 
 push:
-	docker push $(TAG):$(VERSION)
+	docker push $(tag)
