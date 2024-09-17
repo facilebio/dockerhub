@@ -8,9 +8,22 @@ LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 # RUN pwd
 # RUN dat
 
+# RUN --mount=type=secret,id=GITHUB_PAT \
+#     GITHUB_PAT=$(cat /run/secrets/GITHUB_PAT) \
+#     Rscript -e "library(BiocManager); install(c(\
+#         'facilebio/FacileData', \
+#         'facilebio/FacileBiocData', \
+#         'facilebio/FacileViz', \
+#         'facilebio/FacileShine', \
+#         'facilebio/FacileAnalysis', \
+#         'facilebio/FacileAnalysisShine', \
+#         'facilebio/FacileIncubator' \
+#     ))" \
+#     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
+
 RUN --mount=type=secret,id=GITHUB_PAT \
     GITHUB_PAT=$(cat /run/secrets/GITHUB_PAT) \
-    Rscript -e "library(BiocManager); install(c(\
+    Rscript -e "pak::pkg_install(c(\
         'facilebio/FacileData', \
         'facilebio/FacileBiocData', \
         'facilebio/FacileViz', \
@@ -18,7 +31,7 @@ RUN --mount=type=secret,id=GITHUB_PAT \
         'facilebio/FacileAnalysis', \
         'facilebio/FacileAnalysisShine', \
         'facilebio/FacileIncubator' \
-    ))" \
+    ), upgrade = TRUE, ask = FALSE)" \
     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 # Init command for s6-overlay
