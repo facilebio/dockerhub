@@ -40,6 +40,24 @@ ADD base-packages.txt /tmp/
 # header libraries from here. So also this related note about pre-built packages
 # and RSPM.
 #   https://community.rstudio.com/t/package-manager-and-travis/73816
+# RUN Rscript -e "\
+#   pak::pkg_install(c(\
+#       'RApiSerialize', \
+#       'Rcpp', \
+#       'cpp11', \
+#       'RcppEigen', \
+#       'RcppAnnoy', \
+#       'RcppArmadillo', \
+#       'RcppHNSW', \
+#       'RcppParallel', \
+#       'igraph', \
+#       'magick', \
+#       'mclust', \
+#       'RANN', \
+#       'V8'), \
+#     repos = 'https://cran.rstudio.com', \
+#     type = 'source')"
+
 RUN Rscript -e "\
   pak::pkg_install(c(\
       'RApiSerialize', \
@@ -54,9 +72,7 @@ RUN Rscript -e "\
       'magick', \
       'mclust', \
       'RANN', \
-      'V8'), \
-    repos = 'https://cran.rstudio.com', \
-    type = 'source')"
+      'V8'))"
 
 # Use the default RSPM mojo to install the rest of the packages
 RUN R -f /tmp/base-packages-install.R
