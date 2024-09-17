@@ -12,7 +12,14 @@ LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 # Newer versions of bioconductor_docker image sets options::repos to a
 # frozen RSPM date. This is good for reproducibility at large, but I like
 # to live on the edge/latest.
-RUN sudo echo 'options(repos = c(CRAN = "https://packagemanager.rstudio.com/all/__linux__/bionic/latest"))' >> /usr/local/lib/R/etc/Rprofile.site
+# Figure out the URL for the CRAN repository to use to install binary packages
+# using this tool:
+# https://packagemanager.posit.co/client/#/repos/cran/setup
+# RUN sudo echo 'options(repos = c(CRAN = "https://packagemanager.rstudio.com/all/__linux__/bionic/latest"))' >> /usr/local/lib/R/etc/Rprofile.site
+# RUN sudo echo 'options(repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/jammy/latest"))' >> /usr/local/lib/R/etc/Rprofile.site
+
+# Use pak?
+RUN Rscript -e "install.packages('pak')"
 
 # Required for textshaping library
 RUN sudo apt-get update -y
@@ -34,7 +41,7 @@ ADD base-packages.txt /tmp/
 # and RSPM.
 #   https://community.rstudio.com/t/package-manager-and-travis/73816
 RUN Rscript -e "\
-  install.packages(c(\
+  pak::pkg_install(c(\
       'RApiSerialize', \
       'Rcpp', \
       'cpp11', \
@@ -58,8 +65,8 @@ RUN R -f /tmp/base-packages-install.R
 # every now and again without reinstalling all of them again, so we can
 # do that here. Run a no-op command to flip this on/of/rerun
 # RUN pwd
-RUN Rscript -e "options(repos = 'https://cran.rstudio.com/'); BiocManager::install(update = TRUE, ask = FALSE)" \
-   && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
+# RUN Rscript -e "options(repos = 'https://cran.rstudio.com/'); BiocManager::install(update = TRUE, ask = FALSE)" \
+#    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 # Init command for s6-overlay
 CMD ["/init"]
