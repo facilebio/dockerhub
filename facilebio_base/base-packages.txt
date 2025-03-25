@@ -4,6 +4,7 @@ annotate
 AnnotationDbi
 AnnotationFilter
 AnnotationHub
+arrow
 askpass
 assertthat
 aws.s3
@@ -61,6 +62,7 @@ doFuture
 dplyr
 DT
 dtplyr
+duckdb
 edgeR
 ellipsis
 ensembldb
