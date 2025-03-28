@@ -21,5 +21,15 @@ RUN --mount=type=secret,id=GITHUB_PAT \
     ), upgrade = TRUE, ask = FALSE)" \
     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
-# Init command for s6-overlay
+RUN Rscript -e \
+    "install.packages(\
+        'msigdbdf', \
+        repos = c(\
+            'https://igordot.r-universe.dev',\
+            'https://cloud.r-project.org'\
+        )\
+    )" \
+    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
+
+    # Init command for s6-overlay
 CMD ["/init"]
