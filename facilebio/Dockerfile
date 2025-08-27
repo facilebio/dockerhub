@@ -30,6 +30,7 @@ RUN --mount=type=secret,id=GITHUB_PAT \
         'facilebio/FacileShine', \
         'facilebio/FacileAnalysis', \
         'facilebio/FacileAnalysisShine', \
+        'facilebio/FacileArchs4Data', \
         'facilebio/FacileIncubator' \
     ), upgrade = TRUE, ask = FALSE)" \
     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
