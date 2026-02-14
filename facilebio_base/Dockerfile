@@ -1,5 +1,6 @@
 # syntax=docker/dockerfile:1
-FROM bioconductor/bioconductor_docker:RELEASE_3_19
+# FROM bioconductor/bioconductor_docker:RELEASE_3_19
+FROM rocker/shiny-verse:latest
 LABEL maintainer="Steve Lianoglou (slianoglou@gmail.com)"
 
 # We need to install the preview version of RStudio because the "release"
